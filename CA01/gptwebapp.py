@@ -65,6 +65,33 @@ def gptdemo():
             <p><input type=submit value="get response">
         </form>
         '''
+    
+@app.route('/py_to_mat', methods=['GET', 'POST'])
+def py_to_mat():
+    '''takes a request form from the user and adds a prompt
+    to the form, askign gpt to convert the following python
+     code into matlab code'''
+    
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.generateMATLAB(prompt)
+
+        return f'''
+        <h1> Convert Python to MATLAB </h1>
+        {prompt}</pre>
+        <hr>
+        New Code in MATLAB:
+        <div style="border:thin solid black">{answer}</div>
+        <br>
+        <a href={url_for('py_to_mat')}> Convert more code</a>
+        '''
+    else:
+        return '''
+        <h1> Convert Python to MATLAB </h1>
+        Enter a block of Python code below that you would like GPT to MATLAB code
+        <form method="post">
+            <textarea name ="prompt"></textarea>
+            <p><input type=submit value="Get New Code">'''
 
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
