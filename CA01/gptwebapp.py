@@ -11,7 +11,6 @@ On Mac
 % pip3 install flask
 % export APIKEY="......."  # in bash
 % python3 gptwebapp.py
-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
 On Windows:
 % pip install openai
 % pip install flask
@@ -35,6 +34,8 @@ def index():
     return f'''
         <h1>GPT Demo</h1>
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
+        <h1>Shakesperean Sonnet</h1>
+        <a href="{url_for('shakeSonnet')}">Ask questions to GPT</a>
     '''
 
 
