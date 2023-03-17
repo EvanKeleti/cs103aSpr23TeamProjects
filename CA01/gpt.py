@@ -82,7 +82,6 @@ class GPT():
         completion = openai.Completion.create(
             engine=self.model_engine,
             prompt="Write a shakesperean sonnet about the following: "+prompt,
-            Shakesperean-sonnet
             max_tokens=1024,
             n=1,
             stop=None,
