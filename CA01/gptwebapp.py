@@ -32,12 +32,22 @@ def index():
     ''' display a link to the general query page '''
     print('processing / route')
     return f'''
+        <h1>Team page</h1>
+        <a href="{url_for('Team')}">page with info about team members</a>
         <h1>GPT Demo</h1>
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
         <h1>Shakesperean Sonnet</h1>
-        <a href="{url_for('shakeSonnet')}">Ask questions to GPT</a>
+        <a href="{url_for('shakeSonnet')}">Turn a prompt into a Shakespearean Sonnet</a>
     '''
-
+@app.route('/Team')
+def Team():
+    return('''
+    <h1>Team Page</h1>
+    <b>Lucas Dia</b>
+    <p>I am a sophomore, I am on the Varsity XC and TF team. I am majoring in CS, ECON, and BUS. I created the Shakespearean Sonnet method, and the shakeSonnet method. I also made the Team page. </p>
+    '''
+        
+    )
 
 @app.route('/gptdemo', methods=['GET', 'POST'])
 def gptdemo():
