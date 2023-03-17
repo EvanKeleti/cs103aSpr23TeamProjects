@@ -45,6 +45,7 @@ class GPT():
         response = completion.choices[0].text
         return response
     
+
     #Simon Goode's request method
     def comment_code(self,prompt):
         ''' Generate GPT response that comments given code '''
@@ -66,6 +67,22 @@ class GPT():
         completion = openai.Completion.create(
             engine=self.model_engine,
             prompt="Convert the following python code into MATLAB code: " + prompt,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.8,
+        )
+        
+        response = completion.choices[0].text
+        return response
+
+    #Lucas Dia's request method
+    def Shakesperean_Sonnet(self, prompt):
+        '''Generate a GPT response'''
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt="Write a shakesperean sonnet about the following: "+prompt,
+            Shakesperean-sonnet
             max_tokens=1024,
             n=1,
             stop=None,
