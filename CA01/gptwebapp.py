@@ -11,7 +11,6 @@ On Mac
 % pip3 install flask
 % export APIKEY="......."  # in bash
 % python3 gptwebapp.py
-
 On Windows:
 % pip install openai
 % pip install flask
@@ -33,12 +32,12 @@ def index():
     ''' display a link to the general query page '''
     print('processing / route')
     return f'''
+        <h1>Team page</h1>
+        <a href="{url_for('Team')}">page with info about team members</a>
+        <h1>About page</h1>
+        <a href="{url_for('about')}">page with info about each GPT method</a>
         <h1>GPT Demo</h1>
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
-<<<<<<< Updated upstream
-    '''
-
-=======
         <h1>Shakesperean Sonnet</h1>
         <a href="{url_for('shakeSonnet')}">Turn a prompt into a Shakespearean Sonnet</a>
         <h1>Convert Python Code to MATLAB Code</h1>
@@ -46,6 +45,7 @@ def index():
         <h1>Code Comments</h1>
         <a href="{url_for('code_comments')}">Automatically comments your code</a>
     '''
+    
 @app.route('/Team')
 def Team():
     return('''
@@ -84,7 +84,6 @@ def about():
     the form of comments. </p>
     <br>
     ''')
->>>>>>> Stashed changes
 
 @app.route('/gptdemo', methods=['GET', 'POST'])
 def gptdemo():
@@ -117,7 +116,7 @@ def gptdemo():
 @app.route('/py_to_mat', methods=['GET', 'POST'])
 def py_to_mat():
     '''takes a request form from the user and adds a prompt
-    to the form, askign gpt to convert the following python
+    to the form, asking gpt to convert the following python
      code into matlab code'''
     
     if request.method == 'POST':
@@ -132,14 +131,47 @@ def py_to_mat():
         <div style="border:thin solid black">{answer}</div>
         <br>
         <a href={url_for('py_to_mat')}> Convert more code</a>
+        <br>
+        <a href={url_for('index')}> Index Page </a>
         '''
     else:
-        return '''
+        return f'''
         <h1> Convert Python to MATLAB </h1>
         Enter a block of Python code below that you would like GPT to MATLAB code
         <form method="post">
             <textarea name ="prompt"></textarea>
-            <p><input type=submit value="Get New Code">'''
+            <p><input type=submit value="Get New Code">
+        </form>
+        <a href={url_for('index')}> Index Page </a>
+        '''
+        
+@app.route('/shakeSonnet', methods=['GET', 'POST'])
+def shakeSonnet():
+    ''' handle a get request by sending a form 
+        and a post request by returning the GPT response
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.Shakesperean_Sonnet(prompt)
+        return f'''
+        <h1>Write a shakespearean sonnet using the prompt</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('shakeSonnet')}> make another query</a>
+        '''
+    else:
+        return '''
+        <h1>GPT Shakesperean Sonnet APP</h1>
+        Enter your query below
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
 
 @app.route('/code_comments', methods=['GET', 'POST'])
 def code_comments():
@@ -171,4 +203,4 @@ def code_comments():
 
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
-    app.run(debug=True,port=5001)
+    app.run(debug=True,port=5002)
