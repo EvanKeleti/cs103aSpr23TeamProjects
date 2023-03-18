@@ -123,7 +123,7 @@ def py_to_mat():
         <a href={url_for('index')}> Index Page </a>
         '''
     else:
-        return '''
+        return f'''
         <h1> Convert Python to MATLAB </h1>
         Enter a block of Python code below that you would like GPT to MATLAB code
         <form method="post">
