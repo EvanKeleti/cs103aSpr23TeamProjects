@@ -133,8 +133,6 @@ def py_to_mat():
         <a href={url_for('index')}> Index Page </a>
         '''
         
-
-
 @app.route('/shakeSonnet', methods=['GET', 'POST'])
 def shakeSonnet():
     ''' handle a get request by sending a form 
