@@ -163,35 +163,6 @@ def shakeSonnet():
         </form>
         '''
 
-
-@app.route('/shakeSonnet', methods=['GET', 'POST'])
-def shakeSonnet():
-    ''' handle a get request by sending a form 
-        and a post request by returning the GPT response
-    '''
-    if request.method == 'POST':
-        prompt = request.form['prompt']
-        answer = gptAPI.Shakesperean_Sonnet(prompt)
-        return f'''
-        <h1>Write a shakespearean sonnet using the prompt</h1>
-        <pre style="bgcolor:yellow">{prompt}</pre>
-        <hr>
-        Here is the answer in text mode:
-        <div style="border:thin solid black">{answer}</div>
-        Here is the answer in "pre" mode:
-        <pre style="border:thin solid black">{answer}</pre>
-        <a href={url_for('shakeSonnet')}> make another query</a>
-        '''
-    else:
-        return '''
-        <h1>GPT Shakesperean Sonnet APP</h1>
-        Enter your query below
-        <form method="post">
-            <textarea name="prompt"></textarea>
-            <p><input type=submit value="get response">
-        </form>
-        '''
-
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
     app.run(debug=True,port=5002)
