@@ -90,7 +90,12 @@ class GPT():
         
         response = completion.choices[0].text
         return response
-        
+
+    #Evan Keleti's request method
+    def recipe(self, prompt):
+        '''Generate cooking recipe using GPT'''
+        return self.getResponse("Give me a recipe for: " + prompt)
+
 if __name__=='__main__':
     '''
     '''
