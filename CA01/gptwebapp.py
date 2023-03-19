@@ -48,7 +48,7 @@ def team():
     <h1>Team Page</h1>
     <b>Lucas Dia</b>
     <p>I am a sophomore, I am on the Varsity XC and TF team. I am majoring in CS, ECON, and BUS. I created the Shakespearean Sonnet method, and the shakeSonnet method.
-    I also made the Team page, and about page. </p>
+    I also contributed to the index page and made the Team page, and about page. </p>
     <br>
     <b>Nathan Weiss</b>
     <p>I'm a sophomore studying Applied Math and Computer Science here at Brandeis. I created generateMATLAB 
@@ -149,7 +149,7 @@ def py_to_mat():
         {prompt}</pre>
         <hr>
         New Code in MATLAB:
-        <div style="border:thin solid black">{answer}</div>
+        <pre style="border:thin solid black">{answer}</pre>
         <br>
         <a href={url_for('py_to_mat')}> Convert more code</a>
         <br>
