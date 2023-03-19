@@ -32,22 +32,18 @@ def index():
     ''' display a link to the general query page '''
     print('processing / route')
     return f'''
-        <h1>Team page</h1>
-        <a href="{url_for('Team')}">page with info about team members</a>
-        <h1>About page</h1>
-        <a href="{url_for('about')}">page with info about each GPT method</a>
+        <h1>Team Page</h1>
+        <a href="{url_for('team')}">Info about team members</a>
+        <h1>About Page</h1>
+        <a href="{url_for('about')}">Info about this program and each GPT method</a>
         <h1>GPT Demo</h1>
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
-        <h1>Shakesperean Sonnet</h1>
-        <a href="{url_for('shakeSonnet')}">Turn a prompt into a Shakespearean Sonnet</a>
-        <h1>Convert Python Code to MATLAB Code</h1>
-        <a href="{url_for('py_to_mat')}">Converts your python code into MATLAB code</a>
-        <h1>Code Comments</h1>
-        <a href="{url_for('code_comments')}">Automatically comments your code</a>
+        <h1>GPT Methods</h1>
+        <a href={url_for('gpt_methods')}>Try out different GPT methods</a>
     '''
     
-@app.route('/Team')
-def Team():
+@app.route('/team')
+def team():
     return('''
     <h1>Team Page</h1>
     <b>Lucas Dia</b>
@@ -62,28 +58,53 @@ def Team():
     <p>I'm a sophomore studying Applied Math and Economics, and I love going to the gym. I created comment_code 
     in gpt.py and code_comments in gptwebapp.py, and contributed to the Index and Team pages. </p>
     <br>
+    <b>Evan Keleti</b>
+    <p>I'm a freshman studying Computer Science and Physics. I created the recipe method in gpt.py and organized the index and about pages.</p>
     '''
     )
 
 @app.route('/about')
 def about():
-    return('''
+    return f'''
     <h1>About Page</h1>
-    <b>Shakesperean Sonnet Method</b>
-    <p>The Shakespearean Sonnet method takes the given prompt and asks GPT to write a shakespearean style sonnet using the prompt as inspiration. </p>
-    <br>
-    <br>
-    <b>Python to MATLAB Method</b>
-    <p>The Python to MATLAB method prompts the user to enter some python code that they want converted to MATLAB code. When that is input
-    and the form is passed, we add some text to the front of their code saying that we want this code converted to MATLAB before passing
-    to GPT. </p>
-    <br>
-    <br>
-    <b>Code Commenting Method</b>
-    <p>The Code Commenting Method takes code text as input and outputs the same code but with meaningful and pertinent documentation in
-    the form of comments. </p>
-    <br>
-    ''')
+    <p>This program allows users to get GPT responses for specific prompts that each have an individual method and page. Each team member
+    created a page that sends a form to the user and uses the input to prompt GPT for a response.</p>
+    <div>
+        <a href="{url_for('shakeSonnet')}"><b>Shakesperean Sonnet Method</b></a>
+        <p>The Shakespearean Sonnet method takes the given prompt and asks GPT to write a shakespearean style sonnet using the prompt as inspiration. </p>
+    </div>
+    <div>
+        <a href="{url_for('py_to_mat')}"><b>Python to MATLAB Method</b></a>
+        <p>The Python to MATLAB method prompts the user to enter some python code that they want converted to MATLAB code. When that is input
+        and the form is passed, we add some text to the front of their code saying that we want this code converted to MATLAB before passing
+        to GPT. </p>
+    </div>
+    <div>
+        <a href="{url_for('code_comments')}"><b>Code Commenting Method</b></a>
+        <p>The Code Commenting Method takes code text as input and outputs the same code but with meaningful and pertinent documentation in
+        the form of comments. </p>
+    </div>
+    <div>
+        <a href="{url_for('recipe')}"><b>Recipe Creation Method</b></a>
+        <p>The recipe creation asks gpt to generate a recipe to create the given prompt. This method is intended to be used for food recipes, but
+        GPT will be asked to generate a recipe no matter what the input is.</p>
+    </div>
+    
+    '''
+
+@app.route('/gpt_methods')
+def gpt_methods():
+    return f'''
+        <h1>Shakesperean Sonnet</h1>
+        <a href="{url_for('shakeSonnet')}">Turn a prompt into a Shakespearean Sonnet</a>
+        <h1>Convert Python Code to MATLAB Code</h1>
+        <a href="{url_for('py_to_mat')}">Converts your python code into MATLAB code</a>
+        <h1>Code Comments</h1>
+        <a href="{url_for('code_comments')}">Automatically comments your code</a>
+        <h1>Recipe Creation</h1>
+        <a href="{url_for('recipe')}">Generate recipes</a>
+    '''
+
 
 @app.route('/gptdemo', methods=['GET', 'POST'])
 def gptdemo():
@@ -201,6 +222,31 @@ def code_comments():
         </form>
         '''
 
+@app.route('/recipe', methods=['GET', 'POST'])
+def recipe():
+    '''
+    Handles a get request by sending a form prompting the user. Handles a post request by returning the response of asking GPT to give
+    a recipe for the user input.
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.recipe(prompt)
+        return f'''
+        <h1>GPT Recipe Creation</h1>
+        <p>Here is a recipe for {prompt}:</p>
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('recipe')}>make another query</a>
+        '''
+    else:
+        return '''
+        <h1>GPT Recipe Creation</h1>
+        Enter your query below:
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
+
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
-    app.run(debug=True,port=5002)
+    app.run(debug=True,port=5001)
