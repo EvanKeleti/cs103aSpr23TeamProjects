@@ -128,7 +128,7 @@ def py_to_mat():
         {prompt}</pre>
         <hr>
         New Code in MATLAB:
-        <div style="border:thin solid black">{answer}</div>
+        <pre style="border:thin solid black">{answer}</pre>
         <br>
         <a href={url_for('py_to_mat')}> Convert more code</a>
         <br>
