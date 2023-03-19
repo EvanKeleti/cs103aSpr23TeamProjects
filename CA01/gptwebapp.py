@@ -42,7 +42,10 @@ def index():
         <a href="{url_for('shakeSonnet')}">Turn a prompt into a Shakespearean Sonnet</a>
         <h1>Convert Python Code to MATLAB Code</h1>
         <a href="{url_for('py_to_mat')}">Converts your python code into MATLAB code</a>
+        <h1>Code Comments</h1>
+        <a href="{url_for('code_comments')}">Automatically comments your code</a>
     '''
+    
 @app.route('/Team')
 def Team():
     return('''
@@ -55,6 +58,10 @@ def Team():
     <p>I'm a sophomore studying Applied Math and Computer Science here at Brandeis. I created generateMATLAB 
     in gpt.py and py_to_mat in gptwebapp.py and contributed to the Index page and this page. </p>
     <br>
+    <b>Simon Goode</b>
+    <p>I'm a sophomore studying Applied Math and Economics, and I love going to the gym. I created comment_code 
+    in gpt.py and code_comments in gptwebapp.py, and contributed to the Index and Team pages. </p>
+    <br>
     '''
     )
 
@@ -63,13 +70,18 @@ def about():
     return('''
     <h1>About Page</h1>
     <b>Shakesperean Sonnet Method</b>
-    <p>The Shakespearean Sonnet method takes the given prompt and asks GPT to write a shakespearean style sonnet using the prompt as inspiration. 
+    <p>The Shakespearean Sonnet method takes the given prompt and asks GPT to write a shakespearean style sonnet using the prompt as inspiration. </p>
     <br>
     <br>
     <b>Python to MATLAB Method</b>
     <p>The Python to MATLAB method prompts the user to enter some python code that they want converted to MATLAB code. When that is input
     and the form is passed, we add some text to the front of their code saying that we want this code converted to MATLAB before passing
-    to GPT. <p>
+    to GPT. </p>
+    <br>
+    <br>
+    <b>Code Commenting Method</b>
+    <p>The Code Commenting Method takes code text as input and outputs the same code but with meaningful and pertinent documentation in
+    the form of comments. </p>
     <br>
     ''')
 
@@ -116,14 +128,14 @@ def py_to_mat():
         {prompt}</pre>
         <hr>
         New Code in MATLAB:
-        <div style="border:thin solid black">{answer}</div>
+        <pre style="border:thin solid black">{answer}</pre>
         <br>
         <a href={url_for('py_to_mat')}> Convert more code</a>
         <br>
         <a href={url_for('index')}> Index Page </a>
         '''
     else:
-        return '''
+        return f'''
         <h1> Convert Python to MATLAB </h1>
         Enter a block of Python code below that you would like GPT to MATLAB code
         <form method="post">
@@ -154,6 +166,34 @@ def shakeSonnet():
     else:
         return '''
         <h1>GPT Shakesperean Sonnet APP</h1>
+        Enter your query below
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
+
+@app.route('/code_comments', methods=['GET', 'POST'])
+def code_comments():
+    '''handle a get request by sending a form
+       and a post request by returning the commented code response
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.comment_code(prompt)
+        return f'''
+        <h1>Comment your code using the prompt</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('code_comments')}> make another query</a>
+        '''
+    else:
+        return '''
+        <h1>GPT Code Commenting App</h1>
         Enter your query below
         <form method="post">
             <textarea name="prompt"></textarea>
