@@ -38,8 +38,14 @@ def index():
         <a href="{url_for('about')}">Info about this program and each GPT method</a>
         <h1>GPT Demo</h1>
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
-        <h1>GPT Methods</h1>
-        <a href={url_for('gpt_methods')}>Try out different GPT methods</a>
+        <h1>Shakesperean Sonnet</h1>
+        <a href="{url_for('shakeSonnet')}">Turn a prompt into a Shakespearean Sonnet</a>
+        <h1>Convert Python Code to MATLAB Code</h1>
+        <a href="{url_for('py_to_mat')}">Converts your python code into MATLAB code</a>
+        <h1>Code Comments</h1>
+        <a href="{url_for('code_comments')}">Automatically comments your code</a>
+        <h1>Recipe Creation</h1>
+        <a href="{url_for('recipe')}">Generate recipes</a>
     '''
     
 @app.route('/team')
@@ -47,7 +53,7 @@ def team():
     return('''
     <h1>Team Page</h1>
     <b>Lucas Dia</b>
-    <p>I am a sophomore, I am on the Varsity XC and TF team. I am majoring in CS, ECON, and BUS. I created the Shakespearean Sonnet method, and the shakeSonnet method.
+    <p>I am a sophomore, I am on the XC and TF team. I am majoring in CS, ECON, and BUS. I created the Shakespearean Sonnet method, and the shakeSonnet method.
     I also contributed to the index page and made the Team page, and about page. </p>
     <br>
     <b>Nathan Weiss</b>
@@ -91,20 +97,6 @@ def about():
     </div>
     
     '''
-
-@app.route('/gpt_methods')
-def gpt_methods():
-    return f'''
-        <h1>Shakesperean Sonnet</h1>
-        <a href="{url_for('shakeSonnet')}">Turn a prompt into a Shakespearean Sonnet</a>
-        <h1>Convert Python Code to MATLAB Code</h1>
-        <a href="{url_for('py_to_mat')}">Converts your python code into MATLAB code</a>
-        <h1>Code Comments</h1>
-        <a href="{url_for('code_comments')}">Automatically comments your code</a>
-        <h1>Recipe Creation</h1>
-        <a href="{url_for('recipe')}">Generate recipes</a>
-    '''
-
 
 @app.route('/gptdemo', methods=['GET', 'POST'])
 def gptdemo():
