@@ -3,10 +3,10 @@ import sqlite3
 import os
 
 def toDict(t):
-    ''' t is a tuple (rowid, title, desc, completed)'''
+    ''' t is a tuple (item #, amount. category, date, description)'''
     print('t='+str(t))
-    todo = {'rowid':t[0], 'title':t[1], 'desc':t[2], 'completed':t[3]}
-    return todo
+    transactions = {'item #':t[0], 'amount':t[1], 'category':t[2], 'date':t[3], 'description':t[4]}
+    return transactions
 
 class Transaction():
 
