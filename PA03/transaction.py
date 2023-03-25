@@ -26,8 +26,8 @@ class Transaction():
         return [toDict(t) for t in tuples]
     
     def showTransactions(self):
-        ''''''
-        return self.runQuery()
+        '''show the transactions in the database'''
+        return self.runQuery("SELECT * FROM transactions", ())
 
     def addTransaction(self, transaction):
         '''creates and adds a transaction to the database'''
@@ -37,4 +37,6 @@ class Transaction():
     def deleteTransation(self, itemNum):
         '''deletes the transaction with the specified item number'''
         return self.runQuery("DELETE FROM transactions WHERE item # = (?)", (itemNum))
+    
+    
     
