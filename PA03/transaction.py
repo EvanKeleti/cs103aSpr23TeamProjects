@@ -17,7 +17,7 @@ class Transaction():
 
     def runQuery(self,query,tuple):
         ''' return all of the uncompleted tasks as a list of dicts.'''
-        con= sqlite3.connect(os.getenv('HOME')+f'/{self.database}')
+        con= sqlite3.connect(os.getenv('HOME', default='~')+f'/{self.database}')
         cur = con.cursor() 
         cur.execute(query,tuple)
         tuples = cur.fetchall()
