@@ -3,7 +3,7 @@ import sqlite3
 import os
 
 def toDict(t):
-    ''' t is a tuple (item #, amount. category, date, description)'''
+    ''' t is a tuple (item #, amount, category, date, description)'''
     print('t='+str(t))
     transactions = {'item #':t[0], 'amount':t[1], 'category':t[2], 'date':t[3], 'description':t[4]}
     return transactions
