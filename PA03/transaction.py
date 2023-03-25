@@ -2,17 +2,9 @@
 import sqlite3
 import os
 
-<<<<<<< HEAD
 def to_dict(t):
     ''' t is a tuple (item #, amount. category, date, description)'''
     return {'item #':t[0], 'amount':t[1], 'category':t[2], 'date':t[3], 'description':t[4]}
-=======
-def toDict(t):
-    ''' t is a tuple (item #, amount, category, date, description)'''
-    print('t='+str(t))
-    transactions = {'item #':t[0], 'amount':t[1], 'category':t[2], 'date':t[3], 'description':t[4]}
-    return transactions
->>>>>>> refs/remotes/origin/main
 
 class Transaction():
 
@@ -23,11 +15,7 @@ class Transaction():
 
     def run_query(self,query,tuple):
         ''' return all of the uncompleted tasks as a list of dicts.'''
-<<<<<<< HEAD
         con = sqlite3.connect(self.database)
-=======
-        con= sqlite3.connect(os.getenv('HOME', default='~')+f'/{self.database}')
->>>>>>> refs/remotes/origin/main
         cur = con.cursor() 
         cur.execute(query,tuple)
         tuples = cur.fetchall()
