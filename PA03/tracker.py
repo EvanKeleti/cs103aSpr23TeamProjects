@@ -3,9 +3,7 @@ this handles all user input and performs the correct methods
 based on user input'''
 #written by Lucas Dia
 import sys
-from transaction import Transaction
-
-
+from transaction import Transaction, to_dict
 
 
 def print_usage():
@@ -82,9 +80,7 @@ def process_args(arglist):
         if len(arglist)!=6:
             print_usage()
         else:
-            trans = {'item #':arglist[1],'amount':arglist[2],
-                     'category':arglist[3],'date':arglist[4],'description':arglist[5]}
-            transaction.add_transaction(trans)
+            transaction.add_transaction(to_dict(arglist[1:]))
     elif arglist[0]=='delete':
         if len(arglist)!=2:
             print_usage()
