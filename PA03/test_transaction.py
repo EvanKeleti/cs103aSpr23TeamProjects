@@ -29,18 +29,21 @@ def test_add():
     assert l[len(l)-1]['category'] == 'textbook'
     assert l[len(l)-1]['date'] == '2023-03-25'
     assert l[len(l)-1]['description'] == 'purchased textbook'
+
 def test_show():
     '''tests that showTransactions shows all transactions
     Nathan Weiss'''
     x = to_dict((1,56.30,"test", "2023-01-01","testing"))
     y = to_dict((4,60.75,"textbook", "2023-03-25","purchased textbook"))
     assert [to_dict(t) for t in A.show_transactions()] == [x, y]
+
 def test_delete():
     '''deletes the added transactions and checks that the database is empty
     Nathan Weiss'''
     A.delete_transaction(1)
     A.delete_transaction(4)
     assert [to_dict(t) for t in A.show_transactions()] == []
+
 def test_sum():
     '''tests each summary by date function, adds a few transactions
       to db then checks that summaries are accurate
@@ -60,6 +63,7 @@ def test_sum():
     assert year == A.summarize_by_year()
     cats = [('test1', 1, 13), ('test2', 2, 104), ('test3', 3, 107)]
     assert cats == A.summarize_by_category()
+
 def test_clear():
     '''tests that the clear_transactions method
       removes all transactions from the db
