@@ -12,15 +12,15 @@ def print_usage():
     ''' print an explanation of how to use the commands
      Lucas Dia '''
     print('''usage:
-            transation quit
-            transaction show
-            transaction add item# amount category date(YYYY-MM-DD) description
-            transaction delete item#
-            transaction summarize_by_date
-            transaction summarize_by_month
-            transaction summarize_by_year
-            transaction summarize_by_category
-            transcation clear_transactions
+            quit
+            show
+            add item# amount category date(YYYY-MM-DD) description
+            delete item#
+            summarize_by_date
+            summarize_by_month
+            summarize_by_year
+            summarize_by_category
+            clear_transactions
             '''
             )
 
