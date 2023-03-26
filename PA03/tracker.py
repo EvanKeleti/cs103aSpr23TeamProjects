@@ -1,7 +1,10 @@
+'''tracker.py is used to interface transaction.py
+this handles all user input and performs the correct methods
+based on user input'''
 #written by Lucas Dia
-
-from transaction import Transaction
 import sys
+from transaction import Transaction
+
 
 
 
@@ -19,7 +22,7 @@ def print_usage():
             transcation clear_transactions
             '''
             )
-    
+
 def print_transactions(transactions):
     ''' print the transaction items '''
     if transactions is None:
@@ -58,7 +61,8 @@ def process_args(arglist):
         if len(arglist)!=6:
             print_usage()
         else:
-            trans = {'item #':arglist[1],'amount':arglist[2],'category':arglist[3],'date':arglist[4],'description':arglist[5]}
+            trans = {'item #':arglist[1],'amount':arglist[2],
+                     'category':arglist[3],'date':arglist[4],'description':arglist[5]}
             transaction.add_transaction(trans)
     elif arglist[0]=='delete':
         if len(arglist)!=2:
@@ -70,10 +74,10 @@ def process_args(arglist):
         print(arglist,"is not implemented")
         print_usage()
 
-def toplevel():
+def top_level():
     ''' read the command args and process them'''
     if len(sys.argv)==1:
-        # they didn't pass any arguments, 
+        # they didn't pass any arguments,
         # so prompt for them in a loop
         print_usage()
         args = []
@@ -87,6 +91,5 @@ def toplevel():
         process_args(args)
         print('-'*40+'\n'*3)
 
-    
 
-toplevel()
+top_level()
