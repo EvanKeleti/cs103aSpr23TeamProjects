@@ -1,4 +1,5 @@
-
+'''This file contains code for the Transaction class
+and a to_dict() function that is used in the class and in its testing'''
 import sqlite3
 import os
 
@@ -15,11 +16,11 @@ class Transaction():
                         ("item #" integer, amount real, category text,
                           date text, description text)''',())
 
-    def run_query(self,query,tuple):
+    def run_query(self,query,tup):
         ''' return all of the uncompleted tasks as a list of dicts.'''
         con = sqlite3.connect(self.database)
-        cur = con.cursor() 
-        cur.execute(query,tuple)
+        cur = con.cursor()
+        cur.execute(query,tup)
         tuples = cur.fetchall()
         con.commit()
         con.close()
@@ -32,13 +33,13 @@ class Transaction():
 
     def add_transaction(self, transaction):
         '''creates and adds a transaction to the database'''
-        self.run_query("INSERT INTO transactions VALUES (?,?,?,?,?)", 
+        self.run_query("INSERT INTO transactions VALUES (?,?,?,?,?)",
                         (transaction['item #'], transaction['amount'],
                           transaction['category'], transaction['date'], transaction['description']))
 
-    def delete_transaction(self, itemNum):
+    def delete_transaction(self, item_num):
         '''deletes the transaction with the specified item number'''
-        return self.run_query('DELETE FROM transactions WHERE "item #"=(?)', (itemNum,))
+        return self.run_query('DELETE FROM transactions WHERE "item #"=(?)', (item_num,))
 
     def summarize_by_date(self):
         '''summarizes the transactions by date'''
@@ -61,4 +62,5 @@ class Transaction():
           TOTAL(amount) FROM transactions GROUP BY category''', ())
 
     def clear_transactions(self):
+        '''clears all transactions from the database'''
         self.run_query("DELETE FROM transactions", ())

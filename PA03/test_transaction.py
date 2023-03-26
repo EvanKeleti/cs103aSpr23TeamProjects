@@ -1,7 +1,7 @@
 '''test_transaction.py tests the methods of the transactions.py file
 These tests will all  pass when the database passed in is empty or does not exist'''
-import pytest
-from transaction import *
+
+from transaction import to_dict, Transaction
 
 A = Transaction('transaction.db')
 
@@ -15,15 +15,13 @@ def test_add():
     checks that items are added properly
     Nathan Weiss'''
     A.add_transaction(to_dict((1,56.30,"test", "2023-01-01","testing")))
-    l = [to_dict(t) for t in A.show_transactions()]
-    assert l[len(l)-1]['item #'] == 1
-    assert l[len(l)-1]['amount'] == 56.30
-    assert l[len(l)-1]['category'] == 'test'
-    assert l[len(l)-1]['date'] == '2023-01-01'
-    assert l[len(l)-1]['description'] == 'testing'
-
     A.add_transaction(to_dict((4,60.75,"textbook", "2023-03-25","purchased textbook")))
     l = [to_dict(t) for t in A.show_transactions()]
+    assert l[len(l)-2]['item #'] == 1
+    assert l[len(l)-2]['amount'] == 56.30
+    assert l[len(l)-2]['category'] == 'test'
+    assert l[len(l)-2]['date'] == '2023-01-01'
+    assert l[len(l)-2]['description'] == 'testing'
     assert l[len(l)-1]['item #'] == 4
     assert l[len(l)-1]['amount'] == 60.75
     assert l[len(l)-1]['category'] == 'textbook'

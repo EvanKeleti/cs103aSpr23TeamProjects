@@ -70,7 +70,7 @@ def process_args(arglist):
         print(arglist,"is not implemented")
         print_usage()
 
-def toplevel():
+def top_level():
     ''' read the command args and process them'''
     if len(sys.argv)==1:
         # they didn't pass any arguments, 
@@ -89,4 +89,4 @@ def toplevel():
 
     
 
-toplevel()
+top_level()
