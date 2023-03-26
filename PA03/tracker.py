@@ -10,7 +10,7 @@ def print_usage():
     print('''usage:
             transation quit
             transaction show
-            transaction add item# amount category date description
+            transaction add item# amount category date(YYYY-MM-DD) description
             transaction delete item#
             transaction summarize_by_date
             transaction summarize_by_month
@@ -61,10 +61,10 @@ def process_args(arglist):
             trans = {'item #':arglist[1],'amount':arglist[2],'category':arglist[3],'date':arglist[4],'description':arglist[5]}
             transaction.add_transaction(trans)
     elif arglist[0]=='delete':
-        if len(arglist)!=6:
+        if len(arglist)!=2:
             print_usage()
         else:
-            trans = {'item #':arglist[2]}
+            trans = {'item #':arglist[1]}
             transaction.delete_transaction(trans)
     else:
         print(arglist,"is not implemented")
