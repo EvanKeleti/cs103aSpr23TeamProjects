@@ -35,11 +35,12 @@ class Transaction():
 
     def delete_transation(self, itemNum):
         '''deletes the transaction with the specified item number'''
-        return self.run_query("DELETE FROM transactions WHERE item #=(?)", (itemNum))
+        return self.run_query("DELETE FROM transactions WHERE item #=(?)", (itemNum,))
     
     def summarize_by_date(self):
         '''summarizes the transactions by date'''
-        return self.run_query("SELECT * FROM transactions WHERE date = ")
+        return self.run_query('''SELECT strftime('%Y-%m-%d', date) as day, COUNT(*) as count, TOTAL(amount) FROM transactions
+                                 GROUP BY day ORDER BY day''', ())
 
     def summarize_by_month(self):
         '''summarize the transactions by month'''
@@ -53,19 +54,8 @@ class Transaction():
     
     def summarize_by_category(self):
         '''summarize the transactions by category'''
-        return self.run_query("SELECT * FROM transactions WHERE category=(?)", ())
+        return self.run_query("SELECT category, COUNT(*) as count, TOTAL(amount) FROM transactions GROUP BY category", ())
     
     def clear_transactions(self):
         self.run_query("DELETE FROM transactions", ())
 
-if __name__ == "__main__":
-    transactions = Transaction('test.db')
-    transactions.clear_transactions()
-    transactions.add_transaction(to_dict((5, 23.61, 'test1', '2004-03-30', 'testing')))
-    transactions.add_transaction(to_dict((5, 19.72, 'test2', '2004-02-25', 'testing')))
-    transactions.add_transaction(to_dict((5, 24.00, 'test3', '2004-03-03', 'testing')))
-    transactions.add_transaction(to_dict((5, 24.00, 'test3', '2002-03-03', 'testing')))
-    transactions.add_transaction(to_dict((5, 24.00, 'test3', '2005-03-03', 'testing')))
-    print(transactions.show_transactions())
-    print(transactions.summarize_by_month())
-    print(transactions.summarize_by_year())
