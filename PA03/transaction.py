@@ -9,8 +9,10 @@ def to_dict(t):
 
 class Transaction():
     '''Class that alters the database, this class has no direct contact with user input
-    is interfaced by tracker.py'''
+    is interfaced by tracker.py - Evan Keleti'''
+
     def __init__(self, filename):
+        '''creates the database using the given filename - Evan Keleti'''
         self.database = filename
         self.run_query('''CREATE TABLE IF NOT EXISTS transactions
                         ("item #" integer, amount real, category text,
