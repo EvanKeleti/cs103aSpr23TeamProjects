@@ -33,9 +33,9 @@ class Transaction():
         self.run_query("INSERT INTO transactions VALUES (?,?,?,?,?)", 
                         (transaction['item #'], transaction['amount'], transaction['category'], transaction['date'], transaction['description']))
 
-    def delete_transation(self, itemNum):
+    def delete_transaction(self, itemNum):
         '''deletes the transaction with the specified item number'''
-        return self.run_query("DELETE FROM transactions WHERE item #=(?)", (itemNum,))
+        return self.run_query('DELETE FROM transactions WHERE "item #"=(?)', (itemNum,))
     
     def summarize_by_date(self):
         '''summarizes the transactions by date'''
