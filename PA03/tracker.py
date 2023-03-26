@@ -71,8 +71,7 @@ def process_args(arglist):
         if len(arglist)!=2:
             print_usage()
         else:
-            trans = {'item #':arglist[1]}
-            transaction.delete_transaction(trans)
+            transaction.delete_transaction(arglist[1])
     else:
         print(arglist,"is not implemented")
         print_usage()
