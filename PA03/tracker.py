@@ -24,7 +24,7 @@ def print_usage():
             '''
             )
 
-def print_transactions(transactions):
+def print_transactions(transactions, x):
     ''' print the transaction items 
     Lucas Dia'''
     if transactions is None:
@@ -33,9 +33,27 @@ def print_transactions(transactions):
     if len(transactions)==0:
         print('no transactions to print')
         return
-    print('\n')
-    print(('item #', 'amount', 'category', 'date', 'description'))
-    print('-'*40)
+    if x==1:
+        print('\n')
+        print(('item #', 'amount', 'category', 'date', 'description'))
+        print('-'*40)
+    if x==2:
+        print('\n')
+        print(('date', 'item #', 'amount'))
+        print('-'*40)
+    if x==3:
+        print('\n')
+        print(('month', 'item #', 'amount'))
+        print('-'*40)
+    if x==4:
+        print('\n')
+        print(('year', 'item #', 'amount'))
+        print('-'*40)
+    if x==5:
+        print('\n')
+        print(('category', 'item #', 'amount'))
+        print('-'*40)
+    
     for item in transactions:
         values = tuple(item) #(item #, amount, category, date, description)
         print(values)
@@ -49,17 +67,17 @@ def process_args(arglist):
     elif arglist[0]=="quit":
         exit()
     elif arglist[0]=="show":
-        print_transactions(transaction.show_transactions())
+        print_transactions(transaction.show_transactions(), 1)
     elif arglist[0]=="summarize_by_date":
-        print_transactions(transaction.summarize_by_date())
+        print_transactions(transaction.summarize_by_date(), 2)
     elif arglist[0]=="summarize_by_month":
-        print_transactions(transaction.summarize_by_month())
+        print_transactions(transaction.summarize_by_month(), 3)
     elif arglist[0]=="summarize_by_year":
-        print_transactions(transaction.summarize_by_year())
+        print_transactions(transaction.summarize_by_year(), 4)
     elif arglist[0]=="summarize_by_category":
-        print_transactions(transaction.summarize_by_category())
+        print_transactions(transaction.summarize_by_category(), 5)
     elif arglist[0]=="clear_transactions":
-        print_transactions(transaction.clear_transactions())
+        print_transactions(transaction.clear_transactions(), 0)
     elif arglist[0]=='add':
         if len(arglist)!=6:
             print_usage()
