@@ -98,7 +98,8 @@ def top_level():
         # so prompt for them in a loop
         print_usage()
         args = []
-        while args!=['']:
+        #while args!=['']: exits program if user presses enter - Simon Goode
+        while True:
             args = input("command> ").split(' ')
             process_args(args)
             print('-'*40+'\n'*3)

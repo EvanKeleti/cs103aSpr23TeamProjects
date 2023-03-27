@@ -19,7 +19,7 @@ class Transaction():
                           date text, description text)''',())
 
     def run_query(self,query,tup):
-        ''' return all of the uncompleted tasks as a list of dicts.'''
+        ''' return all of the transactions as a list of dicts - Simon Goode'''
         con = sqlite3.connect(self.database)
         cur = con.cursor()
         cur.execute(query,tup)
