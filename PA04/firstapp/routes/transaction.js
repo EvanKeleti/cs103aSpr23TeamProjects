@@ -5,6 +5,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const TransactionItem = require('../models/TransactionItem');
+//const { isLoggedIn } = require('./pwauth');
 
 
 
@@ -41,5 +42,15 @@ router.post('/transaction',
     }
 )
 
+router.get('/transaction/remove/:transactionId',
+    isLoggedIn,
+    async (req, res) => {
+        console.log("inside /transaction/remove/:transactionId")
+        await TransactionItem.deleteOne(
+            {_id:req.params.transactionId}
+        );
+        res.redirect('/transaction')
+    }
+)
 
 module.exports = router;
