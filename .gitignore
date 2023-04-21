@@ -132,4 +132,4 @@ dmypy.json
 node_modules/
 
 #package lock
-package_lock.json
+PA04/firstapp/package-lock.json
