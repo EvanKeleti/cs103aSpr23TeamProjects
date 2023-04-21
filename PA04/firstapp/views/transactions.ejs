@@ -1,2 +1,38 @@
 
 <h1>Transactions of <%= user.username %></h1>
+
+    <div class = "row">
+        <p>Here is your list of Transactions</p>
+
+
+        <ul class="list-group">
+            <% trs.forEach(tr => { %>
+                <li class="list-group-item">
+                    <span class="mx-5">
+                        <%= tr.description %>                       
+                    </span>
+                    <span>
+                        <%= tr.amount %>
+                    </span>
+                    <span class="mx-5">
+                        <%= tr.category %>
+                    </span>
+                    <span>
+                        <%= tr.date %>
+                    </span>
+                </li>
+            <% }) %>
+        </ul>
+        <h2>Add a new transaction</h2>
+        <form method="post" action="transaction">
+            <input type="text" name="description" placeholder="description">
+            <br>
+            <input type="number" step="0.01" name="amount" placeholder="amount">
+            <br>
+            <input type="text" name="category" placeholder="category">
+            <br>
+            <input type="date" name="date">
+            <br>
+            <input type="submit" value="submit">
+        </form>
+    </div>

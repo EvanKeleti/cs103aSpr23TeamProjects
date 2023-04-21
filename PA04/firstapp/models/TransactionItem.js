@@ -6,9 +6,10 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 var transactionSchema = Schema( {
     description: String,
-    amount: Number,
+    amount: mongoose.Types.Decimal128,
     category: String,
     date: Date,
+    createdAt: Date,
     userId: {type:ObjectId, ref:'user' }
 })
 
