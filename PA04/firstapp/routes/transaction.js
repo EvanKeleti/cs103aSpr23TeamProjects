@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const TransactionItem = require('../models/TransactionItem');
-//const { isLoggedIn } = require('./pwauth');
+
 
 
 
@@ -53,4 +53,29 @@ router.get('/transaction/remove/:transactionId',
     }
 )
 
+router.get('/transaction/edit/:transactionId',
+    isLoggedIn,
+    async (req, res) => {
+        console.log("inside /transaction/edit/:transactionId")
+        const tr = 
+            await TransactionItem.findById(req.params.transactionId);
+        res.locals.tr = tr
+        res.render('transactionEdit')
+    }
+)
+
+router.post('/transaction/updateTransaction',
+    isLoggedIn,
+    async (req, res) => {
+        const {transactionId, description, amount, category,date} = req.body;
+        console.log("inside /transaction/complete/:transactionId");
+        console.log(transactionId);
+        await TransactionItem.findOneAndUpdate(
+            {_id:transactionId},
+            {$set: {description:description,amount:amount,
+                category:category,date:date}}
+        );
+        res.redirect('/transaction')
+    }
+)
 module.exports = router;
