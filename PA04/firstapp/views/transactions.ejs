@@ -1,28 +1,52 @@
-
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
 <h1>Transactions of <%= user.username %></h1>
 
     <div class = "row">
         <p>Here is your list of Transactions</p>
 
-
-        <ul class="list-group">
+        <table>
+            <tr>
+                <th>description</th>
+                <th>amount</th>
+                <th>category</th>
+                <th>date</th>
+                <th>delete</th>
+                <th>edit</th>
+            </tr>
             <% trs.forEach(tr => { %>
-                <li class="list-group-item">
-                    <span class="mx-5">
-                        <%= tr.description %>                       
-                    </span>
-                    <span>
-                        <%= tr.amount %>
-                    </span>
-                    <span class="mx-5">
-                        <%= tr.category %>
-                    </span>
-                    <span>
-                        <%= tr.date %>
-                    </span>
-                </li>
+                <tr>
+                    <td><%= tr.description %> </td>                      
+                    <td><%= tr.amount %> </td>
+                    <td><%= tr.category %> </td>
+                    <td><%= tr.date %> </td>
+                    <td><a href="/todo/remove/<%=tr.userId %>">
+                        <i class="bi bi-trash"></i>
+                      </a>
+                    </td>
+                    <td><a 
+                        href="/todo/edit/<%=tr.userId %>">
+                       <i class="bi bi-pencil-square"></i>
+                        </a>
+                    </td>
+                </tr>
             <% }) %>
-        </ul>
+        </table>
         <h2>Add a new transaction</h2>
         <form method="post" action="transaction">
             <input type="text" name="description" placeholder="description">
