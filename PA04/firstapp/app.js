@@ -106,10 +106,9 @@ app.get('/about',
   }
 )
 
-app.use(transactionRouter);
 app.use(toDoRouter);
 app.use(weatherRouter);
-app.use(TransactionRouter)
+app.use(transactionRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
