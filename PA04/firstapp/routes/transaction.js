@@ -17,13 +17,32 @@ isLoggedIn = (req,res,next) => {
     }
 }
 
-router.get('/transaction',
+router.get('/transaction/',
     isLoggedIn,
     async (req, res, next) => {
+        const sortBy = req.query.sortBy
         let trs=[]
-         trs= 
-            await TransactionItem.find({userId:req.user._id}).sort({createdAt:1})
-        res.render('transactions',{trs})
+        if (sortBy == "category") {
+            trs= 
+            await TransactionItem.find({userId:req.user._id}).sort({category:1})
+        }
+        else if (sortBy == "amount") {
+            trs= 
+            await TransactionItem.find({userId:req.user._id}).sort({amount:1})
+        }
+        else if (sortBy == "date") {
+            trs= 
+            await TransactionItem.find({userId:req.user._id}).sort({date:1})
+        }
+        else if (sortBy == "description") {
+            trs= 
+            await TransactionItem.find({userId:req.user._id}).sort({description:1})
+        }
+        else {
+            trs = 
+             await TransactionItem.find({userId:req.user._id}).sort({createdAt:1})
+        }
+            res.render('transactions',{trs, sortBy})
 });
 
 router.post('/transaction',
@@ -38,7 +57,7 @@ router.post('/transaction',
             userId:req.user._id}
         )
         await transact.save();
-        res.redirect('/transaction')
+        res.redirect('/transaction/')
     }
 )
 
