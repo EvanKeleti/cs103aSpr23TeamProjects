@@ -17,7 +17,7 @@ isLoggedIn = (req,res,next) => {
     }
 }
 
-router.get('/transaction/',
+router.get('/transaction',
     isLoggedIn,
     async (req, res, next) => {
         const sortBy = req.query.sortBy
@@ -57,7 +57,7 @@ router.post('/transaction',
             userId:req.user._id}
         )
         await transact.save();
-        res.redirect('/transaction/')
+        res.redirect('/transaction')
     }
 )
 
