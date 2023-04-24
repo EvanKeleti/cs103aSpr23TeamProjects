@@ -24,10 +24,10 @@
     </tr>
   </thead>
   <tbody>
-    <% result.forEach(item => { %>
+    <% result.map(item => { %>
     <tr>
-      <td><%= item._id %></td>
-      <td><%= item.totalAmount.toFixed(2) %></td>
+      <td><%= item.category %></td>
+      <td><%= item.total.toFixed(2) %></td>
     </tr>
     <% }); %>
   </tbody>
