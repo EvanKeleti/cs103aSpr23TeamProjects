@@ -18,7 +18,7 @@ router.get('/summary', async (req, res) => {
     const result = await TransactionItem.aggregate([
         { $match: { userid: {userId:req.user._id} } },
         { $group: { _id: '$category', totalAmount: { $sum: '$amount' } } },
-        { $sort: { _id: -1} },
+        { $sort: { totalAmount: -1} },
         { $project: { category: '$_id', totalAmount: 1, _id: 0 } }
     ]);
 
