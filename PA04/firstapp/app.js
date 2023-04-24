@@ -7,7 +7,8 @@ const layouts = require("express-ejs-layouts");
 const pw_auth_router = require('./routes/pwauth')
 const toDoRouter = require('./routes/todo');
 const weatherRouter = require('./routes/weather');
-const transactionRouter = require('./routes/transaction')
+const transactionRouter = require('./routes/transaction');
+const summaryRouter = require('./routes/summary');
 const User = require('./models/User');
 
 /* **************************************** */
@@ -108,7 +109,8 @@ app.get('/about',
 
 app.use(toDoRouter);
 app.use(weatherRouter);
-app.use(transactionRouter)
+app.use(transactionRouter);
+app.use(summaryRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
